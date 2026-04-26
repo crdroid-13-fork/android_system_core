@@ -1100,7 +1100,7 @@ static void SetSafetyNetProps() {
     };
 
     for (const auto& [name, value] : props) {
-        res = PropertySetNoSocket(name, value, &error);
+        res = PropertySet(name, value, &error);
         if (res == PROP_SUCCESS) {
             LOG(INFO) << "Property '" << name << "' set successfully to '" << value << "'";
         } else {
@@ -1114,7 +1114,7 @@ static void SetPropIfEmpty(const char* name, const char* value) {
     std::string cur = GetProperty(name, "");
     if (cur.empty()) {
         std::string error;
-        auto res = PropertySetNoSocket(name, value, &error);
+        auto res = PropertySet(name, value, &error);
         if (res != PROP_SUCCESS) {
             LOG(ERROR) << "Failed to set property '" << name
                        << "' to '" << value << "': err=" << res << " (" << error << ")";
